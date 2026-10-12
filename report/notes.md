@@ -141,3 +141,32 @@ This file tracks findings and decisions made during the project.
 - Loaded saved model, predicted Store 1 June 2012: $1,232,132
 - Actual Store 1 June average: $1,561,510 (21% difference, within RMSE range)
 - Model loads and predicts correctly ✓
+
+---
+
+## Task 3.1–3.2 — Streamlit App
+- Created `app/app.py` (Predict page) and `app/pages/2_Model_Comparison.py`
+- Predict page: inputs for store, date (limited to 2010–2012), holiday flag, temperature, fuel price, CPI, unemployment
+- Derives Year/Month/WeekOfYear/Quarter automatically from selected date
+- Shows prediction, and compares with actual value if the store+date exists in data
+- Model Comparison page: metrics table, Plotly RMSE/R² bar charts, feature importance, analysis text
+- Limitation note displayed in app about 2010–2012 data range
+
+## Task 3.4 — README
+- Created README.md with project summary, folder structure, setup instructions, how to run
+
+## Task 3.5 — Draft Report
+- Created `report/draft_report.md` with all required sections:
+  Introduction, Dataset, Methodology, EDA findings, Models and evaluation,
+  Results and interpretation, Application, Limitations, Conclusion, Future scope
+
+## Task 3.6 — Slide Outline
+- Created `report/slide_outline.md` with 7 slides:
+  Title, Problem & Dataset, EDA Highlights, Method, Results, App Demo, Limitations/Future
+
+## Task 3.7 — Questions for the Teacher
+1. Is the time-based split acceptable as the primary evaluation method, or should we use TimeSeriesSplit cross-validation instead?
+2. Should extra models be added (e.g., Gradient Boosting, XGBoost)?
+3. Should the Streamlit front end be evaluated/graded, or is it just supplementary?
+4. How formal and how long should the final report be?
+5. Is hyperparameter tuning required for the draft, or is it a post-feedback task?
