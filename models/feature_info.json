@@ -1,0 +1,29 @@
+{
+  "feature_columns": [
+    "Store",
+    "Holiday_Flag",
+    "Temperature",
+    "Fuel_Price",
+    "CPI",
+    "Unemployment",
+    "Year",
+    "Month",
+    "WeekOfYear",
+    "Quarter"
+  ],
+  "categorical_columns": [
+    "Store"
+  ],
+  "numeric_columns": [
+    "Holiday_Flag",
+    "Temperature",
+    "Fuel_Price",
+    "CPI",
+    "Unemployment",
+    "Year",
+    "Month",
+    "WeekOfYear",
+    "Quarter"
+  ],
+  "best_model": "Linear Regression"
+}

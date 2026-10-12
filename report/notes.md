@@ -94,3 +94,50 @@ This file tracks findings and decisions made during the project.
 - Added 4 new columns from Date: **Year**, **Month**, **WeekOfYear**, **Quarter**.
 - Updated `data/cleaned.csv` with the new columns (6,435 rows, 12 columns).
 - The raw Date column is kept in the file but will be dropped from model input in notebook 02.
+
+---
+
+## Task 2.1 — Data Splits
+- **Time-based split (primary):** Cutoff = April 13, 2012. Train: 5,130 rows (79.7%), Test: 1,305 rows (20.3%).
+  - Train: Feb 2010 – Apr 6, 2012 | Test: Apr 13 – Oct 26, 2012
+- **Random 80/20 split (secondary):** Train: 5,148 rows, Test: 1,287 rows (random_state=42).
+
+## Task 2.2 — Pipelines
+- 3 pipelines using `ColumnTransformer` + `Pipeline`:
+  - **Linear Regression:** OneHotEncode Store + StandardScaler for numerics
+  - **Decision Tree:** OneHotEncode Store + passthrough numerics (max_depth=8, min_samples_leaf=5)
+  - **Random Forest:** OneHotEncode Store + passthrough numerics (n_estimators=200, max_depth=12)
+
+## Task 2.3 — Results Table
+
+| Model | Split | MAE | RMSE | R² |
+|---|---|---|---|---|
+| **Linear Regression** | **Time-based** | **$87,702** | **$119,661** | **0.9497** |
+| Random Forest | Time-based | $253,558 | $299,265 | 0.6854 |
+| Decision Tree | Time-based | $301,050 | $362,275 | 0.5390 |
+| **Linear Regression** | **Random** | **$94,468** | **$153,108** | **0.9272** |
+| Random Forest | Random | $248,811 | $315,890 | 0.6903 |
+| Decision Tree | Random | $311,584 | $385,802 | 0.5380 |
+
+### Interpretation (3–5 sentences)
+1. **Linear Regression is the clear winner** with R²=0.95 and RMSE=$120K on the time-based split — far ahead of Random Forest (R²=0.69) and Decision Tree (R²=0.54).
+2. This is surprising because EDA suggested tree models should outperform LR. The key reason: one-hot encoding Store gives LR 45 separate coefficients, effectively learning each store's baseline sales level precisely. Trees with limited depth can't split finely enough across 45 stores AND time features simultaneously.
+3. The time-based split actually gives LR *better* results than the random split (R²=0.95 vs 0.93), which is unusual. This is likely because the test period (Apr–Oct 2012) avoids the volatile holiday season, making predictions easier.
+4. Feature importance from Random Forest confirms Store identity dominates (top 9 features are all Store dummies), followed by WeekOfYear (seasonality). Temperature, CPI, Unemployment contribute very little.
+5. The EDA prediction that "tree models should outperform LR" was wrong — it shows why you need to actually run experiments, not just look at correlations.
+
+## Task 2.4 — Interpretation Figures
+- `model_actual_vs_predicted_stores.png` — LR tracks actual sales closely for small/medium/large stores
+- `model_predicted_vs_actual_scatter.png` — tight clustering around the perfect-prediction line
+- `model_residual_histogram.png` — residuals centered near zero, roughly normal
+- `model_feature_importance.png` — Store dummies dominate, WeekOfYear is top non-store feature
+
+## Task 2.5 — Best Model Saved
+- Best model: **Linear Regression** (by time-based RMSE)
+- Saved to `models/best_model.joblib`
+- Feature info saved to `models/feature_info.json`
+
+## Task 2.6 — Sanity Check
+- Loaded saved model, predicted Store 1 June 2012: $1,232,132
+- Actual Store 1 June average: $1,561,510 (21% difference, within RMSE range)
+- Model loads and predicts correctly ✓
