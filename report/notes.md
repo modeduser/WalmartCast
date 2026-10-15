@@ -57,3 +57,28 @@ This file tracks key findings, results, and observations throughout the project.
 7. eda_sales_vs_features.png
 
 ---
+
+---
+## Phase 2 — Modeling Results
+
+### Results Table
+
+| Model | Standard MAE | Standard RMSE | Standard R² | Holiday-season MAE | Holiday-season RMSE | Holiday-season R² |
+|---|---|---|---|---|---|---|
+| Baseline | 69,232 | 102,108 | 0.9634 | 175,767 | 303,261 | 0.7865 |
+| Linear Regression | 69,832 | 98,689 | 0.9658 | 121,066 | 188,502 | 0.9175 |
+| Decision Tree | 79,995 | 110,602 | 0.9570 | 131,904 | 223,154 | 0.8844 |
+| Random Forest | 65,099 | 93,617 | 0.9692 | 116,835 | 195,151 | 0.9116 |
+
+### Interpretation
+- **Best model: Linear Regression** (mean RMSE across Standard + Holiday-season tests).
+- Standard test R²=0.9658, RMSE=$98,689. Holiday-season R²=0.9175, RMSE=$188,502.
+- The three models are close; all beat the baseline by a large margin.
+- The holiday-season test is harder: all models see a larger RMSE because Thanksgiving and Christmas weeks are
+  exceptional. A model that ignores holidays would look good on the Standard test but fail here.
+- Feature importance shows Store identity is the dominant predictor. WeekOfYear (seasonality) is second.
+  Economic variables (Temperature, Fuel_Price, CPI, Unemployment) contribute very little individually,
+  confirming the EDA finding that their correlation with sales is weak.
+- Note: the holiday-season test is trained on only one earlier holiday season (2010), so its results
+  are indicative, not conclusive. Formal tuning is future work.
+
