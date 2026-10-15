@@ -9,7 +9,7 @@ This file tracks key findings, results, and observations throughout the project.
 ## Phase 1: EDA Findings
 
 **Data Quality:**
-- Dataset verified: 6,435 rows (45 stores × 143 weeks)
+- Dataset verified: 6,435 rows (45 stores ï¿½ 143 weeks)
 - Date range: 2010-02-05 to 2012-10-26
 - No missing values, no duplicates
 - All sales values are positive
@@ -59,11 +59,11 @@ This file tracks key findings, results, and observations throughout the project.
 ---
 
 ---
-## Phase 2 — Modeling Results
+## Phase 2 ï¿½ Modeling Results
 
 ### Results Table
 
-| Model | Standard MAE | Standard RMSE | Standard R² | Holiday-season MAE | Holiday-season RMSE | Holiday-season R² |
+| Model | Standard MAE | Standard RMSE | Standard Rï¿½ | Holiday-season MAE | Holiday-season RMSE | Holiday-season Rï¿½ |
 |---|---|---|---|---|---|---|
 | Baseline | 69,232 | 102,108 | 0.9634 | 175,767 | 303,261 | 0.7865 |
 | Linear Regression | 69,832 | 98,689 | 0.9658 | 121,066 | 188,502 | 0.9175 |
@@ -72,7 +72,7 @@ This file tracks key findings, results, and observations throughout the project.
 
 ### Interpretation
 - **Best model: Linear Regression** (mean RMSE across Standard + Holiday-season tests).
-- Standard test R²=0.9658, RMSE=$98,689. Holiday-season R²=0.9175, RMSE=$188,502.
+- Standard test Rï¿½=0.9658, RMSE=$98,689. Holiday-season Rï¿½=0.9175, RMSE=$188,502.
 - The three models are close; all beat the baseline by a large margin.
 - The holiday-season test is harder: all models see a larger RMSE because Thanksgiving and Christmas weeks are
   exceptional. A model that ignores holidays would look good on the Standard test but fail here.
@@ -81,4 +81,19 @@ This file tracks key findings, results, and observations throughout the project.
   confirming the EDA finding that their correlation with sales is weak.
 - Note: the holiday-season test is trained on only one earlier holiday season (2010), so its results
   are indicative, not conclusive. Formal tuning is future work.
+
+---
+
+## Phase 3 ï¿½ Testing
+
+**Pytest Results:**
+- All 15 tests pass (exit code 0)
+- Test coverage:
+  - `test_evaluate.py`: 5 tests for metrics calculation and formatting
+  - `test_features.py`: 5 tests for feature engineering and pipeline creation
+  - `test_model.py`: 5 tests for model loading, prediction, and metadata
+- Runtime: 1.82s
+- One expected warning: RÂ² score calculation with <2 samples in edge-case test
+
+Full output saved to `.agents/tasks/pytest_output.txt`
 

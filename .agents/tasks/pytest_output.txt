@@ -1,0 +1,27 @@
+=========================================== test session starts ===========================================
+platform win32 -- Python 3.13.7, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\yashk\OneDrive\Documents\Projects\WalmartCast\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\yashk\OneDrive\Documents\Projects\WalmartCast
+plugins: anyio-4.15.1, platformdirs-4.13.0
+collecting ... collecting 5 items                                                                                         collected 15 items                                                                                         
+tests/test_evaluate.py::test_calculate_metrics_perfect_prediction PASSED                             [  6%]
+tests/test_evaluate.py::test_calculate_metrics_known_values PASSED                                   [ 13%]
+tests/test_evaluate.py::test_calculate_metrics_returns_all_keys PASSED                               [ 20%]
+tests/test_evaluate.py::test_format_metrics_rounds_r2_to_4dp PASSED                                  [ 26%]
+tests/test_evaluate.py::test_format_metrics_rounds_others_to_2dp PASSED                              [ 33%]
+tests/test_features.py::test_get_feature_columns_returns_expected PASSED                             [ 40%]
+tests/test_features.py::test_prepare_features_adds_time_columns PASSED                               [ 46%]
+tests/test_features.py::test_prepare_features_week_number PASSED                                     [ 53%]
+tests/test_features.py::test_make_pipeline_returns_pipeline PASSED                                   [ 60%]
+tests/test_features.py::test_pipeline_fit_predict PASSED                                             [ 66%]
+tests/test_model.py::test_model_file_exists PASSED                                                   [ 73%]
+tests/test_model.py::test_model_loads PASSED                                                         [ 80%]
+tests/test_model.py::test_model_predicts_finite_positive PASSED                                      [ 86%]
+tests/test_model.py::test_feature_info_exists_and_has_required_keys PASSED                           [ 93%]
+tests/test_model.py::test_feature_info_model_name PASSED                                             [100%]
+============================================ warnings summary =============================================
+tests/test_evaluate.py::test_calculate_metrics_returns_all_keys
+  C:\Users\yashk\OneDrive\Documents\Projects\WalmartCast\.venv\Lib\site-packages\sklearn\metrics\_regression.py:1295: UndefinedMetricWarning: R^2 score is not well-defined with less than two samples.
+    warnings.warn(msg, UndefinedMetricWarning)
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================================== 15 passed, 1 warning in 1.82s ======================================
