@@ -1,0 +1,22 @@
+{
+  "best_model_name": "Linear Regression",
+  "feature_columns": [
+    "Store",
+    "Holiday_Flag",
+    "Temperature",
+    "Fuel_Price",
+    "CPI",
+    "Unemployment",
+    "Year",
+    "Month",
+    "WeekOfYear",
+    "Quarter"
+  ],
+  "training_date_range": {
+    "start": "2010-02-05",
+    "end": "2012-10-26"
+  },
+  "training_rows": 6435,
+  "sklearn_version": "1.9.1",
+  "selection_rule": "Lowest mean RMSE across Standard and Holiday-season tests"
+}
