@@ -41,12 +41,12 @@ WalmartCast trains and compares three regression models (Linear Regression, Deci
 ### Run Notebooks
 
 ```bash
-# Start Jupyter
+# Activate your virtual environment first, then start Jupyter:
 jupyter notebook
 
-# Run in order:
-# 1. notebooks/01_eda_cleaning.ipynb
-# 2. notebooks/02_modeling.ipynb
+# Run notebooks in order:
+# 1. notebooks/01_eda_cleaning.ipynb  — EDA and data cleaning
+# 2. notebooks/02_modeling.ipynb       — Feature engineering, models, evaluation
 ```
 
 ### Run Tests
@@ -65,19 +65,30 @@ streamlit run app/app.py
 
 ```
 WalmartCast/
-├── data/               # Walmart.csv, cleaned.csv
-├── src/                # Reusable feature and evaluation code
-├── notebooks/          # EDA and modeling notebooks
-├── models/             # Trained models and metrics
-├── app/                # Streamlit web application
-├── tests/              # Unit tests
-├── report/             # Findings, figures, documentation
-└── requirements.txt    # Python dependencies
+├── data/               # Walmart.csv (raw), cleaned.csv (processed)
+├── src/                # features.py, evaluate.py — shared logic
+├── notebooks/          # 01_eda_cleaning.ipynb, 02_modeling.ipynb
+├── models/             # best_model.joblib, metrics.json, feature_info.json, test_predictions.csv
+├── app/                # Streamlit app: app.py, ui.py, loaders.py, style.css
+│   └── pages/          # 1_Predict.py, 2_Model_Results.py
+├── tests/              # Unit and smoke tests (pytest)
+├── report/             # notes.md, draft_report.md, slide_outline.md
+│   └── figures/        # 13 saved charts
+└── requirements.txt
 ```
 
 ## Models & Results
 
-Results will be added after Phase 2 (modeling) is complete.
+Three models were trained and evaluated on two time-based tests (Standard and Holiday-season):
+
+| Model | Standard R² | Standard RMSE | Holiday-season R² | Holiday-season RMSE |
+|---|---|---|---|---|
+| Baseline | 0.9634 | $102,108 | 0.7865 | $303,261 |
+| Linear Regression | 0.9658 | $98,689 | 0.9175 | $188,502 |
+| Decision Tree | 0.9570 | $110,602 | 0.8844 | $223,154 |
+| Random Forest | 0.9692 | $93,617 | 0.9116 | $195,151 |
+
+**Linear Regression** is the best model with the lowest mean RMSE across both evaluations ($143,596). All models significantly beat the baseline, though the holiday-season test (Thanksgiving and Christmas weeks) is substantially harder than the standard test, revealing challenges that ordinary weeks hide.
 
 ## Tech Stack
 

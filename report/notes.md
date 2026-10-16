@@ -134,3 +134,62 @@ Run from project root. App launches on http://localhost:8501
 - Feature importance and residuals are from Linear Regression model only
 - Confidence intervals assume normal distribution of residuals
 
+---
+
+## Phase 5 — Documentation
+
+**Files created/updated:**
+- `README.md` — updated with results table and accurate folder map
+- `report/draft_report.md` — complete academic report
+- `report/slide_outline.md` — 10-slide presentation outline
+
+---
+
+## Questions for the Teacher
+
+### Q1: Is time-based evaluation acceptable as the primary evaluation?
+
+This project uses two time-based evaluations as the primary test: a Standard test (train before April 2012, test on the remaining weeks) and a Holiday-season test (train before October 2011, test on Thanksgiving and Christmas weeks). A random 80/20 split is also run for comparison.
+
+The time-based approach is chosen because it matches how the model would be used in practice — you always predict future weeks from past data. A random split would mix future weeks into the training set, which leaks information about seasonal patterns.
+
+**Question:** Is this time-based evaluation strategy (plus holiday-season test) acceptable as the primary evaluation for this lab submission, with the random split shown as a secondary reference?
+
+### Q2: Should hyperparameter tuning be added?
+
+The current model settings (Decision Tree: max_depth=None, min_samples_leaf=3; Random Forest: n_estimators=300, max_depth=None, min_samples_leaf=2) are sensible defaults from a short diagnostic sweep, not formally tuned. A proper tuning step would use GridSearchCV or RandomizedSearchCV with TimeSeriesSplit (to avoid leaking future weeks into training during cross-validation).
+
+Formal tuning was left out to keep the project scope manageable and the code explainable.
+
+**Question:** Should formal hyperparameter tuning (with TimeSeriesSplit cross-validation) be added to the project for the final submission?
+
+### Q3: Should the front end be part of the evaluated deliverable?
+
+Phase 4 built a Streamlit web app with three pages: Home, Predict, and Model Results. The app reads from the trained model and metrics files and lets users interactively predict sales.
+
+**Question:** Should the Streamlit application be included as part of the evaluated deliverable, or is the scope limited to the notebooks, code, and report?
+
+### Q4: How formal and long should the report be?
+
+The current draft report (`report/draft_report.md`) follows the synopsis structure with all required headings. It is written in simple, explainable language suitable for a viva.
+
+**Question:** What is the expected length and formality of the final report? Should it follow a specific journal/conference format, or is a structured markdown/PDF report sufficient?
+
+---
+
+## Limitations (stated clearly)
+
+1. Only two holiday seasons (2010 and 2011) are in the training data. The holiday-season test is indicative, not conclusive.
+2. Weekly store-level data only — no product breakdown, no daily granularity.
+3. Model trained on 2010–2012 data only — cannot generalise to new stores or future years reliably.
+4. Model settings are sensible defaults from a diagnostic sweep, not formally tuned with cross-validation.
+5. No lag features — the model treats each week independently and has no memory of the previous week.
+
+## Future Scope
+
+1. Hyperparameter tuning using GridSearchCV/RandomizedSearchCV with TimeSeriesSplit
+2. Lag features: last week's sales, same-week sales from the previous year
+3. Gradient boosting models: XGBoost, LightGBM, or CatBoost
+4. Larger or more recent dataset (e.g. Rossmann Store Sales — daily, more stores)
+5. Cloud deployment of the Streamlit app
+6. Daily granularity data and time-series models (Prophet, SARIMA)
