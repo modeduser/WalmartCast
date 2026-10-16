@@ -37,7 +37,7 @@ date_range = f"{date_min} – {date_max}"
 
 # Best model info from metrics
 best_model_name = feature_info['best_model_name']
-best_r2 = metrics_df.loc[metrics_df['model'] == best_model_name, 'test_r2'].values[0]
+best_r2 = metrics_df.loc[metrics_df['Model'] == best_model_name, 'R2'].values[0]
 best_model_display = f"{best_model_name} | R² {best_r2:.4f}"
 
 kpi_row([

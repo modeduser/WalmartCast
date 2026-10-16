@@ -149,21 +149,21 @@ with tab2:
     ))
     fig_preds.add_trace(go.Scatter(
         x=filtered_preds['Date'],
-        y=filtered_preds['Pred_Linear'],
+        y=filtered_preds['Linear'],
         mode='lines',
         name='Linear Regression',
         line=dict(dash='dot', width=2)
     ))
     fig_preds.add_trace(go.Scatter(
         x=filtered_preds['Date'],
-        y=filtered_preds['Pred_Tree'],
+        y=filtered_preds['Tree'],
         mode='lines',
         name='Decision Tree',
         line=dict(dash='dash', width=2)
     ))
     fig_preds.add_trace(go.Scatter(
         x=filtered_preds['Date'],
-        y=filtered_preds['Pred_Forest'],
+        y=filtered_preds['Forest'],
         mode='lines',
         name='Random Forest',
         line=dict(dash='dashdot', width=2)
