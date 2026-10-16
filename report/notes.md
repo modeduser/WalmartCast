@@ -97,3 +97,40 @@ This file tracks key findings, results, and observations throughout the project.
 
 Full output saved to `.agents/tasks/pytest_output.txt`
 
+---
+
+## Phase 4 — Streamlit Web Application
+
+**Files Created:**
+
+1. **`app/app.py`** — Home page with project overview, quickstart guide, and navigation
+2. **`app/ui.py`** — Shared UI components: page header, info boxes, metric displays, and sidebar configuration
+3. **`app/loaders.py`** — Data and model loading utilities with caching for performance
+4. **`app/pages/1_Predict.py`** — Interactive prediction page: user inputs for store/date/weather, displays forecast
+5. **`app/pages/2_Model_Results.py`** — Model Results page: training metrics table, feature importance chart, residuals plot
+6. **`app/style.css`** — Custom styling for consistent branding and responsive layout
+7. **`tests/test_app_smoke.py`** — Smoke tests verifying imports and page rendering (4 tests)
+8. **`docs/ui.md`** — UI specification and design documentation
+
+**How to Run:**
+```bash
+streamlit run app/app.py
+```
+Run from project root. App launches on http://localhost:8501
+
+**Smoke Test Status:**
+- 4 tests pass (exit code 0)
+- Tests verify: module imports, page rendering without crashes
+- Runtime: ~3.5s
+
+**Page Descriptions:**
+
+- **Home**: Welcomes user, explains project purpose, shows quickstart steps, links to pages
+- **Predict**: Single-store forecast form with store selector, date picker, weather inputs; displays prediction with confidence interval
+- **Model Results**: Training performance table (MAE/RMSE/R² for standard and holiday-season tests), feature importance bar chart, residuals scatter plot
+
+**Limitations:**
+- No multi-store bulk predictions (could be added in future)
+- Feature importance and residuals are from Linear Regression model only
+- Confidence intervals assume normal distribution of residuals
+
