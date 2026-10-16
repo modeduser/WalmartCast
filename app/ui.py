@@ -70,4 +70,6 @@ def chart_layout(fig: go.Figure) -> go.Figure:
         linecolor='#E2E8F0', tickfont=dict(size=11),
         tickformat='$,.0f'
     )
+    # Apply thousands separators to hover text
+    fig.update_traces(hovertemplate='%{y:$,.0f}<extra></extra>')
     return fig

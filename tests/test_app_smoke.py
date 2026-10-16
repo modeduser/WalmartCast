@@ -39,6 +39,16 @@ def test_predict_has_store_selector(predict_app):
     # selectbox for store should exist
     assert len(predict_app.selectbox) >= 1
 
+def test_predict_button_interaction():
+    """Predict button interaction shows prediction metric."""
+    at = AppTest.from_file(os.path.join(_ROOT, 'app', 'pages', '1_Predict.py'), default_timeout=30)
+    at.run()
+    # Click the "Predict Sales" button (should be first button)
+    at.button[0].click()
+    at.run()
+    # After clicking, a prediction metric should appear
+    assert len(at.metric) >= 1, 'Prediction metric not shown after button click'
+
 @pytest.fixture(scope='module')
 def results_app():
     at = AppTest.from_file(os.path.join(_ROOT, 'app', 'pages', '2_Model_Results.py'), default_timeout=30)
